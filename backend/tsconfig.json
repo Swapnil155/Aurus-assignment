@@ -1,0 +1,48 @@
+{
+	"compilerOptions": {
+	  /* Language and Environment */
+	  "target": "es2016",                                 /* Set the JavaScript language version for emitted JavaScript */
+	  "experimentalDecorators": true,                      /* Enable experimental support for legacy decorators */
+	  "emitDecoratorMetadata": true,                       /* Emit design-type metadata for decorated declarations */
+  
+	  /* Modules */
+	  "module": "commonjs",                               /* Specify the module system to use */
+	  "esModuleInterop": true,                             /* Enable interop with CommonJS modules */
+	  "forceConsistentCasingInFileNames": true,            /* Ensure that file names are case-sensitive */
+	  
+	  /* Type Checking */
+	  "strict": true,                                     /* Enable all strict type-checking options */
+	  "skipLibCheck": true,                               /* Skip type checking of declaration files */
+	  
+	  /* Emit */
+	  "sourceMap": true,                                  /* Create source map files for emitted JavaScript */
+	  "declaration": true,                                /* Generate .d.ts files from TypeScript */
+	  "outDir": "./dist",                                  /* Specify an output folder for emitted files */
+	  "removeComments": true,                              /* Disable emitting comments in output */
+	  
+	  /* Interop Constraints */
+	  "allowSyntheticDefaultImports": true,                /* Allow default imports from modules without default exports */
+	  "resolveJsonModule": true,                           /* Allow importing JSON files */
+	  
+	  /* Optional Features */
+	  "lib": ["es2016", "dom"],                           /* Specify the set of library files to include */
+	  "moduleResolution": "node",                          /* Specify module resolution strategy (Node.js style) */
+	  
+	  /* JavaScript Support */
+	  "allowJs": true,                                    /* Allow JavaScript files to be part of the project */
+	  
+	  /* Paths and Base URL */
+	  "baseUrl": "./",                                    /* Set the base directory to resolve non-relative module names */
+	  "paths": {                                           /* Provide paths mapping for module resolution */
+		"*": ["node_modules/*", "src/types/*"]
+	  }
+	},
+	"include": [
+	  "src/**/*.ts"                                       /* Specify the source directory */
+	],
+	"exclude": [
+	  "node_modules",                                     /* Exclude node_modules from being compiled */
+	  "dist"                                              /* Exclude dist folder to avoid compilation of output files */
+	]
+  }
+  
