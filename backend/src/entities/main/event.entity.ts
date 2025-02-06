@@ -4,7 +4,7 @@ import { IamPrincipal } from '../IAM/iamPrincipal.entity';
 import { decrypt, encrypt } from '../../utils';
 
 @Entity({ name: 'event' })
-export class Token extends BaseEntity {
+export class Event extends BaseEntity {
     @Column()
     eventName!: string;
 

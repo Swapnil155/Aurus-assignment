@@ -7,3 +7,4 @@ export * from './master/iamRole.entity';
 export * from './master/iamSource.entity';
 export * from './master/iamType.entity';
 export * from './main/token.entity';
+export * from './main/event.entity'
