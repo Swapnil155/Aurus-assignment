@@ -1,23 +1,41 @@
+import { injectable } from 'inversify';
 import { Between, FindManyOptions, Like, Repository } from 'typeorm';
 import { IEventRepository } from './../../interfaces/';
 import { Event } from '../../entities';
 import { AppDataSource } from '../../config/data-source';
 import ApiError from '../../utils/helper/ApiError';
+
+@injectable()
 export class EventRepository implements IEventRepository {
+
     private readonly eventRepository: Repository<Event>
 
+
     constructor() {
+
         this.eventRepository = AppDataSource.getRepository(Event)
+
     }
 
-    async create(data: Partial<Event>): Promise<Event> {
+
+    async create(
+
+        data: Partial<Event>
+
+    ): Promise<Event> {
 
         const event = this.eventRepository.create(data);
 
         return await this.eventRepository.save(event);
     }
 
-    async update(id: number, data: Partial<Event>): Promise<Event> {
+
+    async update(
+
+        id: number,
+        data: Partial<Event>
+
+    ): Promise<Event> {
 
         const existingPrincipal = await this.eventRepository.findOne({
             where: { id },
@@ -34,13 +52,16 @@ export class EventRepository implements IEventRepository {
         return this.eventRepository.findOneOrFail({ where: { id } });
     }
 
+
     async findAll(
+
         limit: number,
         offset: number,
         search?: string,
         startDate?: Date,
         endDate?: Date
-    ): Promise<Event[]> {
+
+    ): Promise<[Event[], number]> {
 
         const queryOptions: FindManyOptions<Event> = {
 
@@ -71,13 +92,19 @@ export class EventRepository implements IEventRepository {
             ];
         }
 
-        return await this.eventRepository.find(queryOptions);
+        return await this.eventRepository.findAndCount(queryOptions);
     }
 
-    async findById(id: number): Promise<Event | null> {
+
+    async findById(
+
+        id: number
+
+    ): Promise<Event | null> {
 
         return await this.eventRepository.findOneBy({
             id: id,
         });
+
     }
 }

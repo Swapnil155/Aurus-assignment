@@ -1,17 +1,35 @@
 export const INTERFACE_TYPE = {
-	ProductRepository: Symbol.for('ProductRepository'),
-	ProductInteractor: Symbol.for('ProductInteractor'),
-	ProductController: Symbol.for('ProductController'),
+
+
+	// Third-Party
 	Mailer: Symbol.for('Mailer'),
+
 	MessageBroker: Symbol.for('MessageBroker'),
 
-	// Add more interface type here
+
+	// Repository
 	IamPrincipalRepository: Symbol.for('IamPrincipalRepository'),
-	IamPrincipalInteractor: Symbol.for('IamPrincipalInteractor'),
 
 	TokenRepository: Symbol.for('TokenRepository'),
+
+	EventRepository: Symbol.for('EventRepository'),
+
+
+
+	// Controller
+	LoginController: Symbol.for('LoginController'),
+
+	RegistrationController: Symbol.for('RegistrationController'),
+
+	EventController: Symbol.for('EventController'),
+
+
+	// Interactor
+	IamPrincipalInteractor: Symbol.for('IamPrincipalInteractor'),
+
 	TokenInteractor: Symbol.for('TokenInteractor'),
 
-	LoginController: Symbol.for('LoginController'),
-	RegistrationController: Symbol.for('RegistrationController'),
+	EventInteractor: Symbol.for('EventInteractor'),
+
+
 };

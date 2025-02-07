@@ -1,5 +1,4 @@
 import { Container } from 'inversify';
-
 import { IamPrincipalInteractor, TokenInteractor } from '../../interactors';
 import {
 	IIamPrincipalInteractor,
@@ -42,6 +41,7 @@ const userRoutes = Router();
 const loginController = container.get<LoginController>(
 	INTERFACE_TYPE.LoginController
 );
+
 const registrationController = container.get<RegistrationController>(
 	INTERFACE_TYPE.RegistrationController
 );
@@ -50,6 +50,7 @@ userRoutes
 	.route('/login-email')
 	.all(validate(loginSchema))
 	.post(loginController.login.bind(loginController));
+
 userRoutes
 	.route('/register')
 	.post(registrationController.registerEmail.bind(registrationController));
