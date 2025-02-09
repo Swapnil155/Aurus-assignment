@@ -9,6 +9,7 @@ import {
 import ApiError from '../../utils/helper/ApiError';
 import { compareSync } from 'bcrypt';
 import ApiResponse from '../../utils/helper/ApiResponse';
+import config from '../../config/config';
 
 @injectable()
 export class LoginController {
@@ -19,7 +20,7 @@ export class LoginController {
 
 	constructor(
 
-		@inject(INTERFACE_TYPE.TokenInteractor) 
+		@inject(INTERFACE_TYPE.TokenInteractor)
 		tokenInteractor: ITokenInteractor,
 
 		@inject(INTERFACE_TYPE.IamPrincipalInteractor)
@@ -44,7 +45,7 @@ export class LoginController {
 		if (!principal) {
 
 			throw new ApiError(400, 'Invalid email or password');
-			
+
 		}
 
 		const isValidPassword = compareSync(password, principal.password_hash);
@@ -58,6 +59,10 @@ export class LoginController {
 		await this.iamPrincipalInteractor.updateLastLogin(principal.id);
 
 		const tokens = await this.tokenInteractor.generateAuthToken(principal.id);
+
+		res.cookie('accessToken', tokens.access.token, { httpOnly: true, secure: true, sameSite: 'none' })
+
+		res.cookie('refreshToken', tokens.refresh.token, { httpOnly: true, secure: true, sameSite: 'none', maxAge: config.jwt.refreshExpirationDays * 24 * 60 * 60 * 1000 })
 
 		res.status(200).json(new ApiResponse(200, tokens, 'Login success'));
 
