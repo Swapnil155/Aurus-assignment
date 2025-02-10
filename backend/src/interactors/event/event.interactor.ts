@@ -80,5 +80,20 @@ export class EventInteractor implements IEventInteractor {
         return result
     }
 
+    async deleteEvent(id: number): Promise<Event> {
+
+        const result = await this.repository.findById(id)
+
+        if (!result) {
+
+            throw new ApiError(400, "Event not found")
+
+        }
+
+        await this.repository.delete(id)
+
+        return result
+    }
+
 
 }

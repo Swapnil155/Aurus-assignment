@@ -41,7 +41,7 @@ userRoutes.route('/:id')
         upload.fields([{ name: 'eventArtifacts', maxCount: 1 }, { name: 'eventAttendee', maxCount: 1 }]),
         validate(EventUpdateSchema),
         eventController.onUpdateEvent.bind(eventController)
-    )
+    ).delete(eventController.onDeleteEvent.bind(eventController))
 
 
 export default userRoutes;

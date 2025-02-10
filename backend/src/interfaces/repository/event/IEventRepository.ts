@@ -1,3 +1,4 @@
+import { DeleteResult } from 'typeorm';
 import { Event } from '../../../entities';
 
 export interface IEventRepository {
@@ -11,4 +12,5 @@ export interface IEventRepository {
         endDate?: Date
     ): Promise<[Event[], number]>;
     findById(id: number): Promise<Event | null>;
+    delete(id: number): Promise<DeleteResult>
 }

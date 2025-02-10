@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import { Between, FindManyOptions, Like, Repository } from 'typeorm';
+import { Between, DeleteResult, FindManyOptions, Like, Repository } from 'typeorm';
 import { IEventRepository } from './../../interfaces/';
 import { Event } from '../../entities';
 import { AppDataSource } from '../../config/data-source';
@@ -105,6 +105,17 @@ export class EventRepository implements IEventRepository {
         return await this.eventRepository.findOneBy({
             id: id,
         });
+
+    }
+
+
+    async delete(
+
+        id: number
+        
+    ): Promise<DeleteResult> {
+
+        return await this.eventRepository.delete(id)
 
     }
 }

@@ -16,4 +16,5 @@ export interface IEventInteractor {
         currentPage: number
     }>;
     getByIdEvent(id: number): Promise<Event>
+    deleteEvent(id: number): Promise<Event>
 }

@@ -66,4 +66,13 @@ export class EventController {
 
     }
 
+    @AsyncHandler()
+    async onDeleteEvent(req: Request, res: Response) {
+
+        await this.interactor.deleteEvent(Number(req.params.id))
+
+        res.status(200).json(new ApiResponse(200, {}, "Successfully updated"))
+
+    }
+
 } 

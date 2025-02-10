@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } f
 
 // Define the Axios instance with TypeScript
 const instance: AxiosInstance = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'http://localhost:5000' + '/api',
     headers: {
         'Content-Type': 'application/json',
     },
