@@ -96,22 +96,26 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => (
 // Main Event component
 const Event: React.FC = () => {
     return (
-        <Box minH="100vh">
-            <Box >
-                <Heading mb="8" textAlign="center">
-                    All Events
-                </Heading>
-                <SimpleGrid columns={[1, 2, 3]}>
-                    {events.map((event, index) => (
-                        <Box p={2}>
-                            <EventCard key={index} event={event} />
-                        </Box>
-                    ))}
-                </SimpleGrid>
-            </Box>
-
-
+        // <Box minH="100vh">
+        <Box minH="100vh" display="flex" flexDirection="column">
+        <Box flex="1" bg="black" display="flex" justifyContent="center" alignItems="center" h={"50vh"}>
+            <Heading color="white">All Events</Heading>
         </Box>
+        <Box flex="1" bg="white" p={4}>
+            <SimpleGrid columns={[1, 2, 3]}>
+                {events.map((event, index) => (
+                    <Box p={2} key={index}>
+                        <EventCard event={event} />
+                    </Box>
+                ))}
+            </SimpleGrid>
+        </Box>
+    </Box>
+    
+
+
+
+        // </Box>
     );
 };
 

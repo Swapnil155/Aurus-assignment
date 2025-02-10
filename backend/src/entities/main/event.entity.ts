@@ -11,17 +11,26 @@ export class Event extends BaseEntity {
     @Column({ type: 'date' })
     eventDate!: Date;
 
-    @Column({ type: 'time'})
+    @Column({ type: 'time' })
     eventTime!: string;
 
     @Column({
-        type : 'text',
+        type: 'text',
         transformer: {
             to: (value: string) => encrypt(value),
             from: (value: string) => decrypt(value),
         }
     })
     eventVenue!: string;
+
+    @Column()
+    eventArtifacts!: string
+
+    @Column()
+    isImage!: boolean
+
+    @Column({ nullable: true })
+    eventAttendee!: string
 
     @ManyToOne(() => IamPrincipal, { nullable: true, })
     @JoinColumn({ name: 'principal_xid' })

@@ -23,6 +23,14 @@ export class EventController {
     @AsyncHandler()
     async onCreateEvent(req: Request, res: Response) {
 
+        if (req.files && !Array.isArray(req.files)) {
+
+            req.body.eventArtifacts = req.files['eventArtifacts'][0].path
+
+            req.body.eventAttendee = req.files['eventAttendee'][0].path
+
+        }
+
         await this.interactor.createEvent(req.body);
 
         res.status(201).json(new ApiResponse(201, {}, 'Successfully created'));

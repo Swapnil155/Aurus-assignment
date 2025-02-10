@@ -7,15 +7,16 @@ const allowedFileTypes = [
 	'image/jpeg',
 	'image/png',
 	'image/gif',
-	'application/pdf',
-	'application/msword',
-	'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 	'video/mp4',
 	'video/x-msvideo',
 	'video/x-matroska',
 	'video/webm',
 	'video/ogg',
 	'video/quicktime',
+	'application/pdf',
+	'application/msword',
+	'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+	'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
 ];
 
 const createFolder = (folderPath: string): void => {
@@ -42,7 +43,8 @@ const storage = (folderName: string = 'asset'): StorageEngine =>
 				createFolder(basePath);
 				const targetPath = path.join(basePath, folderName);
 				createFolder(targetPath);
-				cb(null, targetPath);
+				// cb(null, targetPath);
+				cb(null, `public/${folderName}`);
 			} catch (err) {
 				cb(err as Error, '');
 			}
@@ -57,28 +59,28 @@ const storage = (folderName: string = 'asset'): StorageEngine =>
 
 const fileFilter =
 	(allowedTypes: string[]) =>
-	(
-		req: Express.Request,
-		file: Express.Multer.File,
-		cb: multer.FileFilterCallback
-	): void => {
-		if (allowedTypes.includes(file.mimetype)) {
-			cb(null, true);
-		} else {
-			const error = new ApiError(
-				400,
-				`File type ${file.mimetype} is not allowed`
-			);
-			cb(error as unknown as null, false);
-		}
-	};
+		(
+			req: Express.Request,
+			file: Express.Multer.File,
+			cb: multer.FileFilterCallback
+		): void => {
+			if (allowedTypes.includes(file.mimetype)) {
+				cb(null, true);
+			} else {
+				const error = new ApiError(
+					400,
+					`File type ${file.mimetype} is not allowed`
+				);
+				cb(error as unknown as null, false);
+			}
+		};
 
 interface UploaderOptions {
 	fileSize?: number;
 	[key: string]: unknown;
 }
 
-export const uploader = (
+export const Uploader = (
 	folderName: string = 'uploads',
 	allowedTypes: string[] = allowedFileTypes,
 	options: UploaderOptions = {}
