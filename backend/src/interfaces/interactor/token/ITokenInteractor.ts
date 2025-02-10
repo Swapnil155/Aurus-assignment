@@ -1,3 +1,10 @@
+import { JwtPayload } from "jsonwebtoken";
+
+export interface ITokenDecode {
+	type: string;
+	sub: number
+}
+
 export interface ITokenInteractor {
 	generateAuthToken(principal_xid: number): Promise<{
 		access: { token: string; expires: Date };
@@ -11,4 +18,5 @@ export interface ITokenInteractor {
 		type: string,
 		secret: string
 	): { token: string; expires: Date };
+	decodeToken(token: string): Promise<JwtPayload | ITokenDecode>
 }

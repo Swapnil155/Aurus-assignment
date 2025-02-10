@@ -6,66 +6,42 @@ import {
     Heading,
     SimpleGrid
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import EventCard from './components/EventCard';
-
-// Define a TypeScript interface for the event data structure
-interface Event {
-    id: number;
-    name: string;
-    date: string;
-    attendees: string;
-    image: string;
-}
-
-// Array of events with type annotations
-const events: Event[] = [
-    {
-        id: 1,
-        name: 'Holi Event',
-        date: '22 March, 2020',
-        attendees:
-            'Darshan Paradkar, Debashish, Lopesh Chandekar, Anas, and Sandeep Sharma',
-        image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/new-year-background-736885_960_720.jpg',
-    },
-    {
-        id: 2,
-        name: 'Holi Event (Video)',
-        date: '22 March, 2020',
-        attendees:
-            'Darshan Paradkar, Debashish, Lopesh Chandekar, Anas, and Sandeep Sharma',
-        image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/new-year-background-736885_960_720.jpg',
-    },
-    {
-        id: 3,
-        name: 'Easter Sunday',
-        date: '22 March, 2020',
-        attendees:
-            'Darshan Paradkar, Debashish, Lopesh Chandekar, Anas, and Sandeep Sharma',
-        image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/new-year-background-736885_960_720.jpg',
-    },
-    {
-        id: 4,
-        name: 'IPL Grand Opening Match MI VS CSK',
-        date: '22 March, 2020',
-        attendees:
-            'Darshan Paradkar, Debashish, Lopesh Chandekar, Anas, and Sandeep Sharma',
-        image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/new-year-background-736885_960_720.jpg',
-    },
-    {
-        id: 5,
-        name: 'Easter Sunday',
-        date: '22 March, 2020',
-        attendees:
-            'Darshan Paradkar, Debashish, Lopesh Chandekar, Anas, and Sandeep Sharma',
-        image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/new-year-background-736885_960_720.jpg',
-    },
-];
-
+import { deleteEvent, getAllEvent } from '@/service/event.service';
 
 // Main Event component
 const Event: React.FC = () => {
+
+    const [events, setEvents] = useState([])
+
+    const fetchEvent = async () => {
+        try {
+            const { data } = await getAllEvent()
+            setEvents(data)
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+
+    useEffect(() => {
+        fetchEvent()
+    }, [])
+
+
+    const deleteEvents = async (id: number) => {
+        try {
+            const { data, status } = await deleteEvent(id)
+            console.log(data, status);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     return (
         <Box position={'relative'} minH="100vh" display="flex" flexDirection="column"
             _after={{
@@ -89,7 +65,7 @@ const Event: React.FC = () => {
                     <SimpleGrid columns={[1, 2, 3]}>
                         {events.map((event, index) => (
                             <Box p={2} key={index}>
-                                <EventCard event={event} />
+                                <EventCard event={event} deleteHandler={deleteEvents} />
                             </Box>
                         ))}
                     </SimpleGrid>

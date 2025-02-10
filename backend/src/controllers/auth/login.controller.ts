@@ -67,4 +67,41 @@ export class LoginController {
 		res.status(200).json(new ApiResponse(200, tokens, 'Login success'));
 
 	}
+
+	@AsyncHandler()
+	async regenerateRefreshToken(req: Request, res: Response) {
+		const token = req.cookies.refreshToken
+
+		if (!token) {
+
+			throw new ApiError(401, "Invalid token")
+
+		}
+
+		const decoded = await this.tokenInteractor.decodeToken(token)
+
+		if (decoded.type !== 'refresh') {
+
+			throw new ApiError(401, 'Invalid Token');
+
+		}
+
+		const isExist = await this.tokenInteractor.isTokenBlackListed(token)
+
+		if (!isExist) {
+
+			throw new ApiError(401, 'Invalid Token')
+			
+		}
+
+		const tokens = await this.tokenInteractor.generateAuthToken(Number(decoded.sub));
+
+		res.cookie('accessToken', tokens.access.token, { httpOnly: true, secure: true, sameSite: 'none' })
+
+		res.cookie('refreshToken', tokens.refresh.token, { httpOnly: true, secure: true, sameSite: 'none', maxAge: config.jwt.refreshExpirationDays * 24 * 60 * 60 * 1000 })
+
+		res.status(200).json(new ApiResponse(200, tokens, 'Login success'));
+
+
+	}
 }

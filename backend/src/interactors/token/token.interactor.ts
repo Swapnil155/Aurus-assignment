@@ -1,10 +1,10 @@
-import { INTERFACE_TYPE } from './../../utils/constant/appConstant';
 import { inject, injectable } from 'inversify';
-import { ITokenRepository } from '../../interfaces';
-import { ITokenInteractor } from '../../interfaces';
-import { sign } from 'jsonwebtoken';
+import { JsonWebTokenError, JwtPayload, sign, verify } from 'jsonwebtoken';
 import moment from 'moment';
 import config from '../../config/config';
+import { ITokenDecode, ITokenInteractor, ITokenRepository } from '../../interfaces';
+import ApiError from '../../utils/helper/ApiError';
+import { INTERFACE_TYPE } from './../../utils/constant/appConstant';
 
 @injectable()
 export class TokenInteractor implements ITokenInteractor {
@@ -87,4 +87,30 @@ export class TokenInteractor implements ITokenInteractor {
 			return false;
 		});
 	}
+
+	async decodeToken(token: string): Promise<JwtPayload | ITokenDecode> {
+
+		try {
+
+			const payload = verify(token, config.jwt.secret) as JwtPayload | ITokenDecode;
+
+			return payload;
+
+		} catch (_error) {
+
+			if (_error instanceof JsonWebTokenError) {
+
+				throw new ApiError(401, 'Please authenticate',);
+
+			} else {
+
+				throw _error
+
+			}
+
+		}
+
+	}
+
+
 }

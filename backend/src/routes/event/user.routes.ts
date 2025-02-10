@@ -8,6 +8,7 @@ import { INTERFACE_TYPE } from './../../utils/constant/appConstant';
 import validate from '../../middleware/validate';
 import { Container } from 'inversify';
 import express from 'express';
+import auth from '../../middleware/auth';
 
 const container = new Container();
 const upload = Uploader('Event')
@@ -29,6 +30,7 @@ userRoutes.route('/')
         validate(SearchSchema),
         eventController.onGetAllEvent.bind(eventController))
     .post(
+        auth(),
         upload.fields([{ name: 'eventArtifacts', maxCount: 1 }, { name: 'eventAttendee', maxCount: 1 }]),
         validate(EventSchema),
         eventController.onCreateEvent.bind(eventController)

@@ -20,10 +20,11 @@ interface Event {
 // Define a TypeScript type for the EventCard component props
 interface EventCardProps {
 	event: Event;
+	deleteHandler: (id: number) => Promise<void>
 }
 
 // EventCard component with strict typing
-const EventCard: React.FC<EventCardProps> = ({ event }) => {
+const EventCard: React.FC<EventCardProps> = ({ event, deleteHandler }) => {
 	const navigate = useNavigate()
 	return (
 		<Box borderWidth="1px" borderRadius="lg" overflow="hidden" shadow="md" >
@@ -49,7 +50,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
 							</Button>
 						</DialogTrigger>
 
-						<DeleteDialog />
+						<DeleteDialog deleteHandler={() => deleteHandler(event.id)} />
 					</DialogRoot>
 				</Stack>
 			</Box>

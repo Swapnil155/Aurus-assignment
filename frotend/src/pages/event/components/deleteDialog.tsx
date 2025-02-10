@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from "@chakra-ui/react"
 
-const DeleteDialog: React.FC = () => {
+const DeleteDialog: React.FC<{ deleteHandler: () => void }> = ({ deleteHandler }) => {
   return (
     <DialogContent>
       <DialogHeader>
@@ -25,7 +25,7 @@ const DeleteDialog: React.FC = () => {
         <DialogActionTrigger asChild>
           <Button variant="outline">Cancel</Button>
         </DialogActionTrigger>
-        <Button>Save</Button>
+        <Button onClick={() => deleteHandler()}>Save</Button>
       </DialogFooter>
       <DialogCloseTrigger />
     </DialogContent>

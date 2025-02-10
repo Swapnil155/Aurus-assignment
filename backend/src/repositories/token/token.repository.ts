@@ -30,7 +30,7 @@ export class TokenRepository implements ITokenRepository {
 	}
 
 	async findToken(token: string): Promise<Token | null> {
-		return await this.tokenRepository.findOne({ where: { token } });
+		return await this.tokenRepository.findOne({ where: { token, isBlacklisted: false } });
 	}
 
 	async makeBackListToken(token: string): Promise<Token | null> {

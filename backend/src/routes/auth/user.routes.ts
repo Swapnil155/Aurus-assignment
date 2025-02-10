@@ -55,4 +55,8 @@ userRoutes
 	.route('/register')
 	.post(registrationController.registerEmail.bind(registrationController));
 
+userRoutes
+	.route('/re-generate-token')
+	.get(loginController.regenerateRefreshToken.bind(loginController))
+
 export default userRoutes;

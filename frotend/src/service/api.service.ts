@@ -26,14 +26,13 @@ instance.interceptors.response.use(
                 }
 
                 try {
-                    const rs: AxiosResponse<{ accessToken: string }> = await instance.get('/api/auth/token');
-                    console.log(rs);
+                    await instance.get('/api/auth/re-generate-token');
 
                     return instance(originalConfig);
                 } catch (_error: unknown) {
 
                     if (_error instanceof AxiosError && _error.response?.status === 401) {
-                        window.location.replace('#/login');
+                        window.location.replace('/');
                         return _error.response;
                     }
                     return Promise.reject(_error);
