@@ -1,13 +1,14 @@
-import { Button } from '@/components/ui/button';
 import {
     Box,
+    Button,
+    Card,
+    Flex,
     Heading,
-    Image,
-    SimpleGrid,
-    Stack,
-    Text
+    SimpleGrid
 } from '@chakra-ui/react';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import EventCard from './components/EventCard';
 
 // Define a TypeScript interface for the event data structure
 interface Event {
@@ -56,66 +57,39 @@ const events: Event[] = [
     },
 ];
 
-// Define a TypeScript type for the EventCard component props
-interface EventCardProps {
-    event: Event;
-}
-
-// EventCard component with strict typing
-const EventCard: React.FC<EventCardProps> = ({ event }) => (
-    <Box
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-        shadow="md"
-        bg="white"
-    >
-        <Image src={event.image} alt={event.name} w="100%" h="150px" />
-        <Box p="4">
-            <Text fontWeight="bold" fontSize="lg" mb="2" color="gray.600">
-                Event Name: {event.name}
-            </Text>
-            <Text fontSize="sm" color="gray.600">
-                {event.date}
-            </Text>
-            <Text fontSize="sm" mt="2" lineBreak={'auto'} color="gray.600">
-                Attendees: {event.attendees}
-            </Text>
-            <Stack direction="row" mt="4">
-                <Button color={'red'} background={'bg.muted'} size="sm">
-                    Edit
-                </Button>
-                <Button colorScheme="red" size="sm">
-                    Delete
-                </Button>
-            </Stack>
-        </Box>
-    </Box>
-);
 
 // Main Event component
 const Event: React.FC = () => {
     return (
-        // <Box minH="100vh">
-        <Box minH="100vh" display="flex" flexDirection="column">
-        <Box flex="1" bg="black" display="flex" justifyContent="center" alignItems="center" h={"50vh"}>
-            <Heading color="white">All Events</Heading>
+        <Box position={'relative'} minH="100vh" display="flex" flexDirection="column"
+            _after={{
+                content: '""',
+                position: 'absolute',
+                top: '0',
+                left: '0',
+                width: '100%',
+                backgroundColor: '#000',
+                height: '300px',
+                zIndex: '9'
+            }}>
+            <Card.Root m={10} p={5} zIndex={'99'}>
+                <Flex justify={'space-between'}>
+                    <Heading ml={2}>All Events</Heading>
+                    <Link to={'/add'}  >
+                        <Button>Add Event</Button>
+                    </Link>
+                </Flex>
+                <Box>
+                    <SimpleGrid columns={[1, 2, 3]}>
+                        {events.map((event, index) => (
+                            <Box p={2} key={index}>
+                                <EventCard event={event} />
+                            </Box>
+                        ))}
+                    </SimpleGrid>
+                </Box>
+            </Card.Root>
         </Box>
-        <Box flex="1" bg="white" p={4}>
-            <SimpleGrid columns={[1, 2, 3]}>
-                {events.map((event, index) => (
-                    <Box p={2} key={index}>
-                        <EventCard event={event} />
-                    </Box>
-                ))}
-            </SimpleGrid>
-        </Box>
-    </Box>
-    
-
-
-
-        // </Box>
     );
 };
 
