@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "dcc060ab-29b8-4514-879a-2e2c39796a76",
+		"name": "Typescript-backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37646712"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"emailAddress\" : \"Swapnil@gmail.com\",\r\n    \"password\" : \"Swapnil@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"Swapnil@gmail.com\",\r\n    \"password\" : \"Swapnil@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/login-email",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"login-email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Event",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/event",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "eventName",
+									"value": "Event Name",
+									"type": "text"
+								},
+								{
+									"key": "eventDate",
+									"value": "25/03/2025",
+									"type": "text"
+								},
+								{
+									"key": "eventTime",
+									"value": "14:00",
+									"type": "text"
+								},
+								{
+									"key": "eventVenue",
+									"value": "Mumbai, India",
+									"type": "text"
+								},
+								{
+									"key": "eventArtifacts",
+									"type": "file",
+									"src": "/C:/Users/wdila/OneDrive/Pictures/download.png"
+								},
+								{
+									"key": "eventAttendee",
+									"type": "file",
+									"src": "/C:/Users/wdila/Downloads/Closed IO .xlsx"
+								},
+								{
+									"key": "isImage",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/event",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "eventName",
+									"value": "Event Name",
+									"type": "text"
+								},
+								{
+									"key": "eventDate",
+									"value": "25/03/2025",
+									"type": "text"
+								},
+								{
+									"key": "eventTime",
+									"value": "14:00",
+									"type": "text"
+								},
+								{
+									"key": "eventVenue",
+									"value": "Mumbai, India",
+									"type": "text"
+								},
+								{
+									"key": "eventArtifacts",
+									"type": "file",
+									"src": "/C:/Users/wdila/OneDrive/Pictures/download.png"
+								},
+								{
+									"key": "eventAttendee",
+									"type": "file",
+									"src": "/C:/Users/wdila/Downloads/Closed IO .xlsx"
+								},
+								{
+									"key": "isImage",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/event/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"event",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/event/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"event",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
