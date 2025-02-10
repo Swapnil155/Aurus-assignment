@@ -4,7 +4,7 @@ import { FileUploadDropzone, FileUploadList, FileUploadRoot } from '@/components
 import { Radio, RadioGroup } from "@/components/ui/radio";
 import { Box, Card, Heading, HStack, Input, Stack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 interface FormValues {
@@ -12,7 +12,12 @@ interface FormValues {
     lastName: string
 }
 // Main Event component
-const AddEvent: React.FC = () => {
+const EditEvent: React.FC = () => {
+
+    const { id } = useParams()
+
+    console.log(id);
+
 
     const navigate = useNavigate()
 
@@ -37,7 +42,7 @@ const AddEvent: React.FC = () => {
                 zIndex: '9'
             }}>
             <Card.Root m={10} p={5} zIndex={'99'}>
-                <Heading ml={2}>Add Events</Heading>
+                <Heading ml={2}>Edit Events</Heading>
                 <Box m={2}>
                     <form onSubmit={onSubmit}>
                         <Stack gap="4" align="flex-start" maxW={'600px'}>
@@ -87,4 +92,4 @@ const AddEvent: React.FC = () => {
     );
 };
 
-export default AddEvent;
+export default EditEvent;

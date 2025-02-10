@@ -12,6 +12,7 @@ import EventCard from './components/EventCard';
 
 // Define a TypeScript interface for the event data structure
 interface Event {
+    id: number;
     name: string;
     date: string;
     attendees: string;
@@ -21,6 +22,7 @@ interface Event {
 // Array of events with type annotations
 const events: Event[] = [
     {
+        id: 1,
         name: 'Holi Event',
         date: '22 March, 2020',
         attendees:
@@ -28,6 +30,7 @@ const events: Event[] = [
         image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/new-year-background-736885_960_720.jpg',
     },
     {
+        id: 2,
         name: 'Holi Event (Video)',
         date: '22 March, 2020',
         attendees:
@@ -35,6 +38,7 @@ const events: Event[] = [
         image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/new-year-background-736885_960_720.jpg',
     },
     {
+        id: 3,
         name: 'Easter Sunday',
         date: '22 March, 2020',
         attendees:
@@ -42,6 +46,7 @@ const events: Event[] = [
         image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/new-year-background-736885_960_720.jpg',
     },
     {
+        id: 4,
         name: 'IPL Grand Opening Match MI VS CSK',
         date: '22 March, 2020',
         attendees:
@@ -49,6 +54,7 @@ const events: Event[] = [
         image: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/new-year-background-736885_960_720.jpg',
     },
     {
+        id: 5,
         name: 'Easter Sunday',
         date: '22 March, 2020',
         attendees:
